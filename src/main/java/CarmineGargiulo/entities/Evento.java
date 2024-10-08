@@ -27,6 +27,10 @@ public class Evento {
     @Column(name = "max_participants")
     private int nrMaxPartecipanti;
 
+    public Evento(){
+
+    }
+
     public Evento(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int nrMaxPartecipanti) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;

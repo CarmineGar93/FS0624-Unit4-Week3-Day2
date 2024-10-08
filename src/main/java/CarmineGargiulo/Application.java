@@ -3,6 +3,7 @@ package CarmineGargiulo;
 import CarmineGargiulo.dao.EventoDao;
 import CarmineGargiulo.entities.Evento;
 import CarmineGargiulo.entities.TipoEvento;
+import CarmineGargiulo.exceptions.NotFoundException;
 import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -29,7 +30,14 @@ public class Application {
                     TipoEvento.PUBBLICO, faker.random().nextInt(10000, 60000));
             eventoList.add(ev);
         }
-        eventoList.forEach(eventoDao::save);
+        /*eventoList.forEach(eventoDao::save);*/
+
+        try{
+            Evento searched = eventoDao.getById(5);
+            System.out.println(searched);
+        }catch (NotFoundException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }

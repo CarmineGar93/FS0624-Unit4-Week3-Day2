@@ -33,8 +33,9 @@ public class Application {
         /*eventoList.forEach(eventoDao::save);*/
 
         try{
-            Evento searched = eventoDao.getById(5);
+            Evento searched = eventoDao.getById(9);
             System.out.println(searched);
+            eventoDao.delete(6);
         }catch (NotFoundException e){
             System.out.println(e.getMessage());
         }

@@ -25,4 +25,13 @@ public class EventoDao {
         if(found == null) throw new NotFoundException(id);
         return found;
     }
+
+    public void delete(long id){
+        Evento found = getById(id);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(found);
+        transaction.commit();
+        System.out.println("L'evento " + found.getTitolo() + " è stato rimosso correttamente");
+    }
 }

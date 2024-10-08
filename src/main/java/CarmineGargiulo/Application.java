@@ -23,14 +23,15 @@ public class Application {
         EventoDao eventoDao = new EventoDao(em);
         List<Evento> eventoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
+            TipoEvento tipoRandom = faker.random().nextInt(1, 3) == 1 ? TipoEvento.PUBBLICO : TipoEvento.PRIVATO;
             Evento ev = new Evento(
                     faker.superhero().name(),
                     LocalDate.of(faker.random().nextInt(1993, 2024), faker.random().nextInt(1 , 12), faker.random().nextInt(1, 27)),
                     faker.superhero().descriptor(),
-                    TipoEvento.PUBBLICO, faker.random().nextInt(10000, 60000));
+                    tipoRandom, faker.random().nextInt(10000, 60000));
             eventoList.add(ev);
         }
-        /*eventoList.forEach(eventoDao::save);*/
+        eventoList.forEach(eventoDao::save);
 
         try{
             Evento searched = eventoDao.getById(9);
@@ -40,5 +41,7 @@ public class Application {
             System.out.println(e.getMessage());
         }
 
+        em.close();
+        emf.close();
     }
 }
